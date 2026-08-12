@@ -19,10 +19,30 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+XiaoWei&family=JetBrains+Mono:wght@400;500&family=M+PLUS+Rounded+1c:wght@400;500;700&family=ZCOOL+KuaiLe&family=LXGW+WenKai&family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=Press+Start+2P&family=Playfair+Display:wght@400;500;600&family=Caveat:wght@400;500;600&family=UnifrakturCook:wght@700&family=Bungee+Shade&family=Nanum+Pen+Script&family=Liu+Jian+Mao+Cao&family=Long+Cang&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="./assets/index-DXWwwoKH.js"></script>
+    <script type="module" crossorigin src="./assets/index-K8QDUEqb.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-mqwnfg1E.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // 检测主 JS 加载失败（通常是 SW 缓存了旧 index.html 导致 404），清除缓存并硬刷新
+      (function () {
+        window.addEventListener('error', function (e) {
+          var target = e.target;
+          if (target && target.tagName === 'SCRIPT' && target.src) {
+            sessionStorage.setItem('__reload_attempted__', '1');
+            if ('caches' in window) {
+              caches.keys().then(function (keys) {
+                Promise.all(keys.map(function (k) { return caches.delete(k); })).then(function () {
+                  location.reload();
+                });
+              });
+            } else {
+              location.reload();
+            }
+          }
+        }, true);
+      })();
+    </script>
   </body>
 </html>
