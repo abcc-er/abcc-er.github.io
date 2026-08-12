@@ -32,10 +32,8 @@
             return Promise.all(promises);
           }).then(function () {
             sessionStorage.setItem(KEY, '1');
-            // 强制硬刷新，加载干净的页面
-            if (window.location.href.indexOf('?clean=1') === -1) {
-              window.location.href = window.location.pathname + window.location.hash + '?clean=1';
-            }
+            // 清理完成后直接刷新，不加 URL 参数
+            window.location.reload();
           }).catch(function () {});
         }
       })();
