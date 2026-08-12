@@ -1,0 +1,18 @@
+{
+  "name": "苜蓿",
+  "short_name": "苜蓿",
+  "description": "苜蓿 - 聊天模拟应用",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4ecd8",
+  "theme_color": "#c73e3a",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
