@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cardtalk-v14-revert';
+const CACHE_NAME = 'cardtalk-v15-datafix';
 const ASSETS = ['./', './index.html', './manifest.json', './favicon.svg'];
 
 self.addEventListener('install', (event) => {
