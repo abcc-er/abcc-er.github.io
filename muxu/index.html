@@ -21,7 +21,7 @@
       // 紧急修复：在页面加载最早期注销旧 Service Worker 并清除所有缓存
       // 防止旧 SW 的 cache-first 策略返回已失效的 JS 文件导致白屏
       (function () {
-        var KEY = '__sw_cleaned_v7__';
+        var KEY = '__sw_cleaned_v9__';
         if (sessionStorage.getItem(KEY)) return; // 已清理过，不再循环
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.getRegistrations().then(function (regs) {
