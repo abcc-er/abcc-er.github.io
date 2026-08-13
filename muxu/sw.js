@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cardtalk-v9';
+const CACHE_NAME = 'cardtalk-v10';
 const ASSETS = ['./', './index.html', './manifest.json', './favicon.svg'];
 
 self.addEventListener('install', (event) => {
