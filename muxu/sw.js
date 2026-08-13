@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cardtalk-v17-wheel';
+const CACHE_NAME = 'cardtalk-v19-rainbow22';
 const ASSETS = ['./', './index.html', './manifest.json', './favicon.svg'];
 
 self.addEventListener('install', (event) => {
