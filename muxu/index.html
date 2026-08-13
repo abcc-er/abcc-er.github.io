@@ -18,11 +18,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>苜蓿</title>
     <script>
-      // 紧急修复：在页面加载最早期注销旧 Service Worker 并清除所有缓存
-      // 防止旧 SW 的 cache-first 策略返回已失效的 JS 文件导致白屏
+      // 强制清理旧 Service Worker 和所有缓存
+      // 每次版本更新都会执行一次清理
       (function () {
-        var KEY = '__sw_cleaned_v12__';
-        if (sessionStorage.getItem(KEY)) return; // 已清理过，不再循环
+        var KEY = '__sw_cleaned_v13__';
+        if (sessionStorage.getItem(KEY)) return;
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.getRegistrations().then(function (regs) {
             var promises = regs.map(function (r) { return r.unregister(); });
@@ -36,9 +36,12 @@
             return Promise.all(promises);
           }).then(function () {
             sessionStorage.setItem(KEY, '1');
-            // 清理完成后直接刷新，不加 URL 参数
             window.location.reload();
-          }).catch(function () {});
+          }).catch(function () {
+            sessionStorage.setItem(KEY, '1');
+          });
+        } else {
+          sessionStorage.setItem(KEY, '1');
         }
       })();
     </script>
@@ -48,8 +51,8 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+XiaoWei&family=JetBrains+Mono:wght@400;500&family=M+PLUS+Rounded+1c:wght@400;500;700&family=ZCOOL+KuaiLe&family=LXGW+WenKai&family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=Press+Start+2P&family=Playfair+Display:wght@400;500;600&family=Caveat:wght@400;500;600&family=UnifrakturCook:wght@700&family=Bungee+Shade&family=Nanum+Pen+Script&family=Liu+Jian+Mao+Cao&family=Long+Cang&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="./assets/index-CBiAUbEq.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-mqwnfg1E.css">
+    <script type="module" crossorigin src="./assets/index-CBiAUbEq.js?v=20260814a"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-mqwnfg1E.css?v=20260814a">
   </head>
   <body>
     <div id="root"></div>
