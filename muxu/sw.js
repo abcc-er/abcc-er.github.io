@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cardtalk-v19-rainbow22';
+const CACHE_NAME = 'cardtalk-v37-icon-tablebg';
 const ASSETS = ['./', './index.html', './manifest.json', './favicon.svg'];
 
 self.addEventListener('install', (event) => {
@@ -13,6 +13,36 @@ self.addEventListener('activate', (event) => {
     )
   );
   self.clients.claim();
+});
+
+// Handle notification click - focus or open the app
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const targetUrl = self.registration.scope;
+  const data = event.notification.data || {};
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      // Try to find an existing tab
+      for (const client of clientList) {
+        if (client.url.includes(targetUrl) && 'focus' in client) {
+          client.focus();
+          // Send message to navigate to the conversation
+          if (data.conversationId) {
+            client.postMessage({
+              type: 'muxu-notification-click',
+              conversationId: data.conversationId
+            });
+          }
+          return;
+        }
+      }
+      // No existing tab found, open a new one
+      if (clients.openWindow) {
+        return clients.openWindow(targetUrl);
+      }
+    })
+  );
 });
 
 self.addEventListener('fetch', (event) => {
